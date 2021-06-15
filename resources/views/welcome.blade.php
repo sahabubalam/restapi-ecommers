@@ -2,7 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Bootstrap E-commerce Templates</title>
+		<title>Online Shop</title>
+	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
@@ -367,6 +368,7 @@
 				<span>Copyright 2013 bootstrappage template  All right reserved.</span>
 			</section>
 		</div>
+	
 		<script src="{{asset('frontend/themes/js/common.js')}}"></script>
 		<script src="{{asset('frontend/themes/js/jquery.flexslider-min.js')}}"></script>
 		<script type="text/javascript">
