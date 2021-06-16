@@ -193,6 +193,45 @@
 			<li><router-link to="/register"><i class="ti-more"></i>Register </router-link></li>
           </ul>
         </li> 
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Product</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/store-product"><i class="ti-more"></i>Add Product </router-link></li>
+			  <li><router-link to="/product"><i class="ti-more"></i>All Product </router-link></li>
+			</ul>
+		</li> 
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Category</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/store-category"><i class="ti-more"></i>Add Category </router-link></li>
+			  <li><router-link to="/category"><i class="ti-more"></i>All Category </router-link></li>
+			</ul>
+		</li> 
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Color</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/store-color"><i class="ti-more"></i>Add Color </router-link></li>
+			  <li><router-link to="/color"><i class="ti-more"></i>All Color </router-link></li>
+			</ul>
+		</li> 
 	
 	
 		
@@ -516,6 +555,25 @@
 <!-- Sunny Admin App -->
 <script src="{{asset('backend/js/template.js')}}"></script>
 <script src="{{asset('backend/js/pages/dashboard.js')}}"></script>
+
+<!-- multiple data insert -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var counter=0;
+        $(document).on("click",".addeventmore",function(){
+            var whole_extra_item_add=$('#whole_extra_item_add').html();
+            $(this).closest(".add_item").append(whole_extra_item_add);
+            counter++;
+        });
+        $(document).on("click",".removeeventmore",function(event){
+            $(this).closest(".delete_whole_extra_item_add").remove();
+            counter-=1;
+
+        });
+
+    });
+</script>   
 	
 	
 </body>
