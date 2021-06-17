@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Color;
+use App\Models\Size;
 use DB;
 
-class ColorController extends Controller
+class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,20 +16,11 @@ class ColorController extends Controller
      */
     public function index()
     {
-      
-
-        $color=Color::all();
-       
-        // $d=$c->color_name;
-        //  $color=explode(',',$d);
-
-        //  foreach ($color as $row) {
-        //  echo $row."<br>";
-        //  }
-        return response()->json($color);
+        $size=Size::all();
+        return response()->json($size);
     }
 
-   
+  
 
     /**
      * Store a newly created resource in storage.
@@ -40,12 +31,12 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'color_name'=>'required|unique:colors|max:255',
+            'size'=>'required|unique:sizes|max:255',
             
         ]);
-        $color= new Color();
-        $color->color_name=$request->color_name;
-        $color->save();
+        $size= new Size();
+        $size->size=$request->size;
+        $size->save();
        // return response()->json($color);
     }
 
@@ -57,7 +48,7 @@ class ColorController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -91,6 +82,7 @@ class ColorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('sizes')->where('id',$id)->delete();
+        
     }
 }

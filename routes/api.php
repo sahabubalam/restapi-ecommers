@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ColorController;
+use App\Http\Controllers\Api\TestController;
+use App\Http\Controllers\Api\SizeController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,3 +26,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('/product', ProductController::class);
 Route::apiResource('/category', CategoryController::class);
 Route::apiResource('/color', ColorController::class);
+Route::apiResource('/size', SizeController::class);
+Route::get('/product/color/{id}', [TestController::class, 'productcolor']);

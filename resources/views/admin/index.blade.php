@@ -232,6 +232,19 @@
 			  <li><router-link to="/color"><i class="ti-more"></i>All Color </router-link></li>
 			</ul>
 		</li> 
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Size</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/store-size"><i class="ti-more"></i>Add Size </router-link></li>
+			  <li><router-link to="/size"><i class="ti-more"></i>All Size </router-link></li>
+			</ul>
+		</li> 
 	
 	
 		
@@ -556,24 +569,6 @@
 <script src="{{asset('backend/js/template.js')}}"></script>
 <script src="{{asset('backend/js/pages/dashboard.js')}}"></script>
 
-<!-- multiple data insert -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        var counter=0;
-        $(document).on("click",".addeventmore",function(){
-            var whole_extra_item_add=$('#whole_extra_item_add').html();
-            $(this).closest(".add_item").append(whole_extra_item_add);
-            counter++;
-        });
-        $(document).on("click",".removeeventmore",function(event){
-            $(this).closest(".delete_whole_extra_item_add").remove();
-            counter-=1;
-
-        });
-
-    });
-</script>   
 	
 	
 </body>

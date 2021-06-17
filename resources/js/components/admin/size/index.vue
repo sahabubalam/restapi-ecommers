@@ -6,8 +6,8 @@
 
             <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Product List</h3>
-                <router-link to="/store-product" style="float:right;" class="btn btn-rounded btn-success mb-5"> Add Product</router-link>
+                <h3 class="box-title">Size List</h3>
+                <router-link to="/store-size" style="float:right;" class="btn btn-rounded btn-success mb-5"> Add Size</router-link>
             </div>
             <br>
                 <input type="text" v-model="searchTerm" placeholder="Search Here" class="form-control mr-2" style="width:300px">
@@ -18,25 +18,17 @@
                     <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Regular Price</th>
-                            <th>Sale Price</th>
-                            <th>Quantity</th>
-                            <th>Image</th>
+                            <th>size</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="product in filtersearch" :key="product.id">
-                            <td>{{product.product_name}}</td>
-                            <td>{{product.regular_price}}</td>
-                            <td>{{product.sale_price}}</td>
-                            <td>{{product.quantity}}</td>
-                            <td><img :src="product.photo" style="height:60px;width:60px"></td>
+                        <tr v-for="size in filtersearch" :key="size.id">
+                            <td>{{size.size}}</td>
+                            
                             <td>
-                            <router-link to="{ name:'edit-employee',params:{id:product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-                            <router-link :to="{ name:'show-product',params:{id:product.id}}" class="btn btn-sm btn-primary">show</router-link>
-                            <a @click="deleteProduct(product.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Delete</font></a>
+                            <router-link to="" class="btn btn-sm btn-primary">Edit</router-link>
+                            <a @click="deleteSize(size.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Delete</font></a>
                             </td>
                         </tr>
                      
@@ -60,24 +52,24 @@
     export default{
         data(){
             return{
-                products:[],
+                sizes:[],
                 searchTerm:''
             }
         },
         computed:{
             filtersearch(){
-                return this.products.filter(product=>{
-                    return product.product_name.match(this.searchTerm)
+                return this.sizes.filter(size=>{
+                    return size.size.match(this.searchTerm)
                 })
             }
         },
         methods:{
-            allProduct(){
-            axios.get('/api/product/')
-            .then(({data})=>this.products=data)
+            allColor(){
+            axios.get('/api/size/')
+            .then(({data})=>this.sizes=data)
             .catch()
         },
-        deleteProduct(id){
+        deleteSize(id){
         Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -88,14 +80,14 @@
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('/api/product/'+id)
+          axios.delete('/api/size/'+id)
           .then(()=>{
-            this.products=this.products.filter(product=>{
-              return product.id!=id
+            this.sizes=this.sizes.filter(size=>{
+              return size.id!=id
             })
           })
           .catch(()=>{
-            this.$router.push({ name: 'prooduct'})
+            this.$router.push({ name: 'size'})
 
           })
           Swal.fire(
@@ -109,7 +101,7 @@
       }
         },
         created(){
-        this.allProduct();
+        this.allColor();
   } 
     }
 </script>

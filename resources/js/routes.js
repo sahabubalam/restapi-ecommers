@@ -10,6 +10,11 @@ let allcategory = require('./components/admin/category/index.vue').default;
 //color component
 let color = require('./components/admin/color/create.vue').default;
 let allcolor = require('./components/admin/color/index.vue').default;
+let single = require('./components/admin/product/test.vue').default;
+//size component
+let size = require('./components/admin/size/create.vue').default;
+let allsize = require('./components/admin/size/index.vue').default;
+
 export const routes = [
     { path: '/login', component: login, name:'login' },
     { path: '/register', component: register, name:'register' },
@@ -23,5 +28,12 @@ export const routes = [
     //color route
     { path: '/store-color', component: color, name:'store-color' },
     { path: '/color', component: allcolor, name:'color' },
+
+    { path: '/show-product/:id', component: single, name:'show-product' },
+
+    //size route
+    { path: '/store-size', component: size, name:'store-size' },
+    { path: '/size', component: allsize, name:'size' },
+   
   
   ]
