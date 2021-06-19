@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Coupon;
 use DB;
 
-class CategoryController extends Controller
+class CouponController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category=Category::all();
-        return response()->json($category);
+        $coupon=Coupon::all();
+        return response()->json($coupon);
     }
 
- 
+   
 
     /**
      * Store a newly created resource in storage.
@@ -31,12 +31,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'category_name'=>'required|unique:categories|max:255',
+            'code'=>'required|unique:coupons|max:255',
+            'type'=>'required',
+            'value'=>'required',
             
         ]);
-        $category= new Category();
-        $category->category_name=$request->category_name;
-        $category->save();
+        $coupon= new Coupon();
+        $coupon->code=$request->code;
+        $coupon->value=$request->value;
+        $coupon->type=$request->type;
+        $coupon->status=1;
+        $coupon->save();
       // return response()->json($category);
     }
 
@@ -48,11 +53,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category=DB::table('categories')->where('id',$id)->first();
-        return response()->json($category);
+        $coupon=DB::table('coupons')->where('id',$id)->first();
+        return response()->json($coupon);
     }
 
-  
+ 
 
     /**
      * Update the specified resource in storage.
@@ -64,8 +69,11 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $data=array();
-        $data['category_name']=$request->category_name;
-        DB::table('categories')->where('id',$id)->update($data);
+        $data['code']=$request->code;
+        $data['value']=$request->value;
+        $data['type']=$request->type;
+        $data['status']=1;
+        DB::table('coupons')->where('id',$id)->update($data);
     }
 
     /**
@@ -76,6 +84,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('categories')->where('id',$id)->delete();
+        DB::table('coupons')->where('id',$id)->delete();
     }
 }

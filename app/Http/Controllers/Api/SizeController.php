@@ -48,19 +48,11 @@ class SizeController extends Controller
      */
     public function show($id)
     {
-        //
+        $size=DB::table('sizes')->where('id',$id)->first();
+        return response()->json($size);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+  
 
     /**
      * Update the specified resource in storage.
@@ -71,7 +63,9 @@ class SizeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=array();
+        $data['size']=$request->size;
+        DB::table('sizes')->where('id',$id)->update($data);
     }
 
     /**

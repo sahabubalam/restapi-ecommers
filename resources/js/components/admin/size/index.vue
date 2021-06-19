@@ -27,7 +27,7 @@
                             <td>{{size.size}}</td>
                             
                             <td>
-                            <router-link to="" class="btn btn-sm btn-primary">Edit</router-link>
+                            <router-link :to="{name:'edit-size',params:{id:size.id}}" class="btn btn-sm btn-primary">Edit</router-link>
                             <a @click="deleteSize(size.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Delete</font></a>
                             </td>
                         </tr>

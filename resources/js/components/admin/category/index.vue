@@ -27,8 +27,9 @@
                             <td>{{category.category_name}}</td>
                             
                             <td>
-                            <router-link to="{ name:'edit-category',params:{id:product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
+                            <router-link :to="{ name:'edit-category',params:{id:category.id}}" class="btn btn-sm btn-primary">Edit</router-link>
                             <a @click="deleteCategory(category.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Delete</font></a>
+                           
                             </td>
                         </tr>
                      
@@ -69,6 +70,7 @@
             .then(({data})=>this.categories=data)
             .catch()
         },
+      
         deleteCategory(id){
         Swal.fire({
         title: 'Are you sure?',
@@ -102,6 +104,10 @@
         },
         created(){
         this.allCategory();
+        this.Active();
+      Reload.$on('AfterAdd',()=>{
+          this.allCategory();
+      })
   } 
     }
 </script>

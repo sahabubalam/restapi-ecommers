@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\SizeController;
+use App\Http\Controllers\Api\CouponController;
+use App\Http\Controllers\Api\AllStatusUpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +29,8 @@ Route::apiResource('/product', ProductController::class);
 Route::apiResource('/category', CategoryController::class);
 Route::apiResource('/color', ColorController::class);
 Route::apiResource('/size', SizeController::class);
+Route::apiResource('/coupon', CouponController::class);
 Route::get('/product/color/{id}', [TestController::class, 'productcolor']);
+//status update controller
+Route::get('/coupon/status/{id}', [AllStatusUpdateController::class, 'couponstatus']);
+Route::get('/product/status/{id}', [AllStatusUpdateController::class, 'productstatus']);

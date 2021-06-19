@@ -245,6 +245,19 @@
 			  <li><router-link to="/size"><i class="ti-more"></i>All Size </router-link></li>
 			</ul>
 		</li> 
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Coupon</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/store-coupon"><i class="ti-more"></i>Add Coupon </router-link></li>
+			  <li><router-link to="/coupon"><i class="ti-more"></i>All Coupon </router-link></li>
+			</ul>
+		</li> 
 	
 	
 		

@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-4">
                         <label>Featured</label>
-                        <select class="form-control my-colorpicker1" id="select" v-model="form.fetured">
+                        <select class="form-control my-colorpicker1" id="select" v-model="form.featured">
                             <option disabled="" selected="">select</option>
                             <option value="1">Yes</option>      
                             <option value="0">No</option> 
@@ -57,9 +57,28 @@
                         <label>Discount</label>
                         <select class="form-control my-colorpicker1" id="select" v-model="form.discount">
                             <option disabled="" selected="">select</option>
+                            <option value="">No</option> 
                             <option value="5%">5%</option>      
                             <option value="10%">10%</option> 
                             <option value="30%">30%</option>   
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Color</label>
+                
+                        <select class="form-control my-colorpicker1" id="select" v-model="form.color_id">
+                            <option disabled="" selected="">select</option>
+                            <option v-for="color in colors" :value="color.id">{{color.color_name}}</option>      
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Size</label>
+                        <select class="form-control my-colorpicker1" id="select" v-model="form.size_id">
+                            <option disabled="" selected="">select</option>
+                            <option v-for="size in sizes" :value="size.id">{{size.size}}</option>  
                         </select>
                     </div>
                     
@@ -101,10 +120,14 @@
                     quantity:null,
                     status:null,
                     category_id:null,
+                    color_id:null,
+                    size_id:null,
                     discount:null,
                     photo:null
                 },
                 categories:{},
+                colors:{},
+                sizes:{},
                 errors:{}
             }
         },
@@ -133,8 +156,15 @@
         },
         },
         created(){
+        //category
         axios.get('/api/category/')
         .then(({data})=>(this.categories=data))
+        //color
+        axios.get('/api/color/')
+        .then(({data})=>(this.colors=data))
+        //size
+        axios.get('/api/size/')
+        .then(({data})=>(this.sizes=data))
     
   }
     }

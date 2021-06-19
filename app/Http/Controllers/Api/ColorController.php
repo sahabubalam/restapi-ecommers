@@ -57,7 +57,8 @@ class ColorController extends Controller
      */
     public function show($id)
     {
-        
+        $color=DB::table('colors')->where('id',$id)->first();
+        return response()->json($color);
     }
 
     /**
@@ -80,7 +81,9 @@ class ColorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=array();
+        $data['color_name']=$request->color_name;
+        DB::table('colors')->where('id',$id)->update($data);
     }
 
     /**
@@ -91,6 +94,6 @@ class ColorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('colors')->where('id',$id)->delete();
     }
 }

@@ -27,7 +27,7 @@
                             <td>{{color.color_name}}</td>
                             
                             <td>
-                            <router-link to="" class="btn btn-sm btn-primary">Edit</router-link>
+                            <router-link :to="{name:'edit-color',params:{id:color.id}}" class="btn btn-sm btn-primary">Edit</router-link>
                             <a @click="deleteColor(color.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Delete</font></a>
                             </td>
                         </tr>
