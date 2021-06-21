@@ -34,7 +34,7 @@ window.Notification = Notification
 
 const router = new VueRouter({
     routes,
-    mode: 'history'
+    mode: 'history',
   })
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);

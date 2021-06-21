@@ -174,25 +174,13 @@
       <ul class="sidebar-menu" data-widget="tree">  
 		  
 		<li>
-          <a href="index.html">
+          <a>
             <i data-feather="pie-chart"></i>
-			<span><router-link to="/home">Dashboard </router-link></span>
+			<span><router-link to="/admin/dashboard/admin-home">Dashboard </router-link></span>
           </a>
         </li>  
 		
-        <li class="treeview">
-          <a href="#">
-            <i data-feather="message-circle"></i>
-            <span>Application</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><router-link to="/login"><i class="ti-more"></i>Login </router-link></li>
-			<li><router-link to="/register"><i class="ti-more"></i>Register </router-link></li>
-          </ul>
-        </li> 
+        
 		<li class="treeview">
 			<a href="#">
 			  <i data-feather="message-circle"></i>
@@ -202,8 +190,8 @@
 			  </span>
 			</a>
 			<ul class="treeview-menu">
-			  <li><router-link to="/store-product"><i class="ti-more"></i>Add Product </router-link></li>
-			  <li><router-link to="/product"><i class="ti-more"></i>All Product </router-link></li>
+			  <li><router-link to="/admin/dashboard/store-product"><i class="ti-more"></i>Add Product </router-link></li>
+			  <li><router-link to="/admin/dashboard/product"><i class="ti-more"></i>All Product </router-link></li>
 			</ul>
 		</li> 
 		<li class="treeview">
@@ -215,8 +203,8 @@
 			  </span>
 			</a>
 			<ul class="treeview-menu">
-			  <li><router-link to="/store-category"><i class="ti-more"></i>Add Category </router-link></li>
-			  <li><router-link to="/category"><i class="ti-more"></i>All Category </router-link></li>
+			  <li><router-link to="/admin/dashboard/store-category"><i class="ti-more"></i>Add Category </router-link></li>
+			  <li><router-link to="/admin/dashboard/category"><i class="ti-more"></i>All Category </router-link></li>
 			</ul>
 		</li> 
 		<li class="treeview">
@@ -228,8 +216,8 @@
 			  </span>
 			</a>
 			<ul class="treeview-menu">
-			  <li><router-link to="/store-color"><i class="ti-more"></i>Add Color </router-link></li>
-			  <li><router-link to="/color"><i class="ti-more"></i>All Color </router-link></li>
+			  <li><router-link to="/admin/dashboard/store-color"><i class="ti-more"></i>Add Color </router-link></li>
+			  <li><router-link to="/admin/dashboard/color"><i class="ti-more"></i>All Color </router-link></li>
 			</ul>
 		</li> 
 		<li class="treeview">
@@ -241,8 +229,8 @@
 			  </span>
 			</a>
 			<ul class="treeview-menu">
-			  <li><router-link to="/store-size"><i class="ti-more"></i>Add Size </router-link></li>
-			  <li><router-link to="/size"><i class="ti-more"></i>All Size </router-link></li>
+			  <li><router-link to="/admin/dashboard/store-size"><i class="ti-more"></i>Add Size </router-link></li>
+			  <li><router-link to="/admin/dashboard/size"><i class="ti-more"></i>All Size </router-link></li>
 			</ul>
 		</li> 
 		<li class="treeview">
@@ -254,8 +242,8 @@
 			  </span>
 			</a>
 			<ul class="treeview-menu">
-			  <li><router-link to="/store-coupon"><i class="ti-more"></i>Add Coupon </router-link></li>
-			  <li><router-link to="/coupon"><i class="ti-more"></i>All Coupon </router-link></li>
+			  <li><router-link to="/admin/dashboard/store-coupon"><i class="ti-more"></i>Add Coupon </router-link></li>
+			  <li><router-link to="/admin/dashboard/coupon"><i class="ti-more"></i>All Coupon </router-link></li>
 			</ul>
 		</li> 
 	
@@ -567,7 +555,7 @@
 </div>
 <!-- ./wrapper -->
 </div>
-  	
+
 <script src="{{asset('js/app.js')}}"></script>
 <!-- Vendor JS -->
 <script src="{{asset('backend/js/vendors.min.js')}}"></script>
@@ -577,7 +565,7 @@
 <script src="{{asset('../assets/vendor_components/apexcharts-bundle/dist/apexcharts.js')}}"></script>
 
 <script src="{{asset('../assets/vendor_components/datatable/datatables.min.js')}}"></script>
-<script src="{{asset('backend/js/pages/data-table.js')}}"></script>
+{{-- <script src="{{asset('backend/js/pages/data-table.js')}}"></script> --}}
 <!-- Sunny Admin App -->
 <script src="{{asset('backend/js/template.js')}}"></script>
 <script src="{{asset('backend/js/pages/dashboard.js')}}"></script>

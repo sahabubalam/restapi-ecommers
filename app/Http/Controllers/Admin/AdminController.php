@@ -12,14 +12,11 @@ class AdminController extends Controller
     {
         return view('admin.admin-login');
     }
-    public function index()
+    public function dashboard()
     {
         return view('admin.index');
     }
-    public function user()
-    {
-        return view('user.index');
-    }
+
     public function Logout()
     {
         Auth::logout();

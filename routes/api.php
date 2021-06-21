@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\SizeController;
 use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\AllStatusUpdateController;
+use App\Http\Controllers\Api\Frontend\AllProductController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,5 @@ Route::get('/product/color/{id}', [TestController::class, 'productcolor']);
 //status update controller
 Route::get('/coupon/status/{id}', [AllStatusUpdateController::class, 'couponstatus']);
 Route::get('/product/status/{id}', [AllStatusUpdateController::class, 'productstatus']);
+//frontend controller
+Route::get('/product/by/category', [AllProductController::class, 'allProduct']);

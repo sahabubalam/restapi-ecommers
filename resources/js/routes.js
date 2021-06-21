@@ -22,32 +22,38 @@ let editsize = require('./components/admin/size/edit.vue').default;
 let coupon = require('./components/admin/coupon/create.vue').default;
 let allcoupon = require('./components/admin/coupon/index.vue').default;
 let editcoupon = require('./components/admin/coupon/edit.vue').default;
-export const routes = [
-    { path: '/login', component: login, name:'login' },
-    { path: '/register', component: register, name:'register' },
-    { path: '/home', component: home, name:'adminhome' },
-    //product route
-    { path: '/store-product', component: product, name:'store-prooduct' },
-    { path: '/product', component: allproduct, name:'prooduct' },
-    { path: '/edit-product/:id', component: editproduct, name:'edit-product' },
-    //category route
-    { path: '/store-category', component: category, name:'store-category' },
-    { path: '/category', component: allcategory, name:'category' },
-    { path: '/edit-category/:id', component: editcategory, name:'edit-category' },
-    //color route
-    { path: '/store-color', component: color, name:'store-color' },
-    { path: '/color', component: allcolor, name:'color' },
-    { path: '/edit-color/:id', component: editcolor, name:'edit-color' },
 
-    { path: '/show-product/:id', component: single, name:'show-product' },
+//frontend
+let productbycat = require('./components/frontend/productbycategory/product.vue').default;
+
+export const routes = [
+    
+    { path: '/admin/dashboard/admin-home', component: home, name:'adminhome' },
+    //product route
+    { path: '/admin/dashboard/store-product', component: product, name:'store-prooduct' },
+    { path: '/admin/dashboard/product', component: allproduct, name:'prooduct' },
+    { path: '/admin/dashboard/edit-product/:id', component: editproduct, name:'edit-product' },
+    //category route
+    { path: '/admin/dashboard/store-category', component: category, name:'store-category' },
+    { path: '/admin/dashboard/category', component: allcategory, name:'category' },
+    { path: '/admin/dashboard/edit-category/:id', component: editcategory, name:'edit-category' },
+    //color route
+    { path: '/admin/dashboard/store-color', component: color, name:'store-color' },
+    { path: '/admin/dashboard/color', component: allcolor, name:'color' },
+    { path: '/admin/dashboard/edit-color/:id', component: editcolor, name:'edit-color' },
+
+    { path: '/admin/dashboard/show-product/:id', component: single, name:'show-product' },
 
     //size route
-    { path: '/store-size', component: size, name:'store-size' },
-    { path: '/size', component: allsize, name:'size' },
-    { path: '/edit-size/:id', component: editsize, name:'edit-size' },
+    { path: '/admin/dashboard/store-size', component: size, name:'store-size' },
+    { path: '/admin/dashboard/size', component: allsize, name:'size' },
+    { path: '/admin/dashboard/edit-size/:id', component: editsize, name:'edit-size' },
      //coupon route
-     { path: '/store-coupon', component: coupon, name:'store-coupon' },
-     { path: '/coupon', component: allcoupon, name:'coupon' },
-     { path: '/edit-coupon/:id', component: editcoupon, name:'edit-coupon' },
+     { path: '/admin/dashboard/store-coupon', component: coupon, name:'store-coupon' },
+     { path: '/admin/dashboard/coupon', component: allcoupon, name:'coupon' },
+     { path: '/admin/dashboard/edit-coupon/:id', component: editcoupon, name:'edit-coupon' },
+
+     //frontend route
+     { path: '/product-bycat', component: productbycat, name:'product-bycat' },
   
   ]

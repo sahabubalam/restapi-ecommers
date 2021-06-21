@@ -32,7 +32,7 @@
                             <td>{{product.regular_price}}</td>
                             <td>{{product.sale_price}}</td>
                             <td>{{product.quantity}}</td>
-                            <td><img :src="product.photo" style="height:60px;width:60px"></td>
+                            <td><img :src="'http://localhost:8000/'+product.photo" style="height:60px;width:60px"></td>
                             <td>
                             <router-link :to="{ name:'edit-product',params:{id:product.id}}" class="btn btn-sm btn-primary">Edit</router-link>
                             <router-link :to="{ name:'show-product',params:{id:product.id}}" class="btn btn-sm btn-primary">show</router-link>
@@ -125,9 +125,9 @@
         created(){
         this.allProduct();
         this.Active();
-      Reload.$on('AfterAdd',()=>{
-          this.allProduct();
-      })
+        Reload.$on('AfterAdd',()=>{
+            this.allProduct();
+        })
   } 
     }
 </script>
