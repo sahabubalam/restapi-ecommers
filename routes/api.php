@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\SizeController;
 use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\AllStatusUpdateController;
 use App\Http\Controllers\Api\Frontend\AllProductController;
+use App\Http\Controllers\Api\Frontend\CartController;
+
 
 
 /*
@@ -33,8 +35,15 @@ Route::apiResource('/color', ColorController::class);
 Route::apiResource('/size', SizeController::class);
 Route::apiResource('/coupon', CouponController::class);
 Route::get('/product/color/{id}', [TestController::class, 'productcolor']);
+Route::get('/product/size/{id}', [TestController::class, 'productsize']);
 //status update controller
 Route::get('/coupon/status/{id}', [AllStatusUpdateController::class, 'couponstatus']);
 Route::get('/product/status/{id}', [AllStatusUpdateController::class, 'productstatus']);
 //frontend controller
 Route::get('/product/by/category', [AllProductController::class, 'allProduct']);
+Route::get('/getting/product/{id}', [AllProductController::class, 'GettingProduct']);
+Route::get('/product/details/{id}', [AllProductController::class, 'ProductDetails']);
+//add to cart
+Route::post('/addtocart/{id}', [CartController::class, 'AddtoCart']);
+
+Route::post('/add/product/review', [AllProductController::class, 'AddProductReview']);

@@ -1,5 +1,4 @@
-let login =require('./components/auth/login.vue').default;
-let register =require('./components/auth/register.vue').default;
+
 let home =require('./components/admin/home.vue').default;
 //product component
 let product = require('./components/admin/product/create.vue').default;
@@ -25,6 +24,9 @@ let editcoupon = require('./components/admin/coupon/edit.vue').default;
 
 //frontend
 let productbycat = require('./components/frontend/productbycategory/product.vue').default;
+let productdetails = require('./components/frontend/productbycategory/product-details.vue').default;
+//product
+
 
 export const routes = [
     
@@ -55,5 +57,10 @@ export const routes = [
 
      //frontend route
      { path: '/product-bycat', component: productbycat, name:'product-bycat' },
+     { path: '/product-details/:id', component: productdetails, name:'product-details' },
+     //review
+     
+
+
   
   ]

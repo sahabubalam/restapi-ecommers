@@ -24,4 +24,20 @@ class TestController extends Controller
             //   }
              return response()->json($color);
     }
+    public function productsize($id)
+    {
+       //$view=Product::find($id);
+        $view=DB::table('products')
+              ->join('sizes','products.size_id','sizes.id')
+              ->select('sizes.size','products.*')
+              ->where('products.id',$id)
+              ->first();
+              $c=$view->size;
+              $size=explode(',',$c);
+            //   foreach($color as $row){
+            //       echo $row."<br>";
+            //   }
+             return response()->json($size);
+    }
+    
 }

@@ -32,12 +32,19 @@ import Notification from './Helpers/Notification';
 window.Notification = Notification
 //end notofication
 
+import StarRating from 'vue-star-rating'
+
+
 const router = new VueRouter({
     routes,
     mode: 'history',
   })
 
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+Vue.component('product-review', require('./components/frontend/product/product-review.vue').default);
+Vue.component('star-rating',StarRating).default;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
