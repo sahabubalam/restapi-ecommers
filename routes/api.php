@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Frontend\CartController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,3 +48,6 @@ Route::get('/product/details/{id}', [AllProductController::class, 'ProductDetail
 Route::post('/addtocart/{id}', [CartController::class, 'AddtoCart']);
 
 Route::post('/add/product/review', [AllProductController::class, 'AddProductReview']);
+Auth::routes();
+Route::get('/user/name', [AllProductController::class, 'name']);
+

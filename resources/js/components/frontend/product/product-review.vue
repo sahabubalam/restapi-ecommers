@@ -10,7 +10,7 @@
                     <div class="container">
                        
                         <h5 class="mt-2">Rate Our Product</h5>
-                            <star-rating v-model="form.rating"></star-rating>
+                            <star-rating :star-size="20" v-model="form.rating"></star-rating>
                             <div class="form-group">
                                 <input type="text" class="form-control" v-model="form.headline" placeholder="Headline">
                             </div>
@@ -18,6 +18,7 @@
                                 <input type="text" class="form-control" v-model="form.description" placeholder="Tell us More">
                             </div>
                             <input type="hidden" class="form-control" v-model="form.product_id">
+                            <input type="hidden" name="user_id" class="form-control" v-model="form.user_id">
                     </div>
             
                 
@@ -36,13 +37,15 @@
 <script>
 
     export default{
-        props:['product'],
+        props:['app','product'],
+      
         data(){
             return{
                 form:{
                     rating:'',
+                    // user_id:this.userid,
+                    user_id:this.$userId,
                     product_id:this.product,
-                    user_id:'',
                     headline:'',
                     description:'',
                     approved:'',
@@ -58,6 +61,7 @@
             .then(()=>{
                    
                     Notification.success()
+                    console.log(this.authUser)
                 })
                 .catch(error=>this.errors=error.response.data.errors)
         },

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AllProductController extends Controller
 {
@@ -37,13 +39,23 @@ class AllProductController extends Controller
     }
     public function AddProductReview(Request $request)
     {
-        $data=array();
-        $data['user_id']=1;
-        $data['product_id']=$request->product_id;
-        $data['rating']=$request->rating;
-        $data['headline']=$request->headline;
-        $data['description']=$request->description;
-        $data['approved']=0;
-        return response()->json($data);
+            
+            $data=array();
+            $data['user_id']=$request->user_id;
+            $data['product_id']=$request->product_id;
+            $data['rating']=$request->rating;
+            $data['headline']=$request->headline;
+            $data['description']=$request->description;
+            $data['approved']=0;
+            return response()->json($data);
     }
+    public function name()
+    {
+        
+        $user=User::all();
+        return response()->json($user);
+       // echo Auth::guard('api')->user()->id;
+    }
+   
+  
 }

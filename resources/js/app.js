@@ -52,6 +52,9 @@ Vue.component('star-rating',StarRating).default;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+//to get user id
+Vue.prototype.$userId=document.querySelector("meta[name='user_id']").getAttribute('content');
+
 const app = new Vue({
     el: '#app',
     router

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Frontend\UserController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,9 +43,13 @@ Route::get('/admin/dashboard/{any}', [AdminController::class, 'dashboard'])->mid
 
 // })->where('vue_capture','[\/\w\.-]*');
 
-   
+
+
+
 Route::get('/', [UserController::class, 'user'])->name('user');
 Route::get('/{any}', [UserController::class, 'user'])->where('any','.*');
+
+
 
 
 

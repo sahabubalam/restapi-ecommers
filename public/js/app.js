@@ -3726,14 +3726,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['product'],
+  props: ['app', 'product'],
   data: function data() {
     return {
       form: {
         rating: '',
+        // user_id:this.userid,
+        user_id: this.$userId,
         product_id: this.product,
-        user_id: '',
         headline: '',
         description: '',
         approved: ''
@@ -3747,6 +3749,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/add/product/review', this.form).then(function () {
         Notification.success();
+        console.log(_this.authUser);
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
       });
@@ -3769,6 +3772,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _product_product_review__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../product/product-review */ "./resources/js/components/frontend/product/product-review.vue");
+//
 //
 //
 //
@@ -4434,7 +4438,9 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.component('star-rating', (vue_star_rati
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+//to get user id
 
+vue__WEBPACK_IMPORTED_MODULE_0__.default.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content');
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   el: '#app',
   router: router
@@ -51069,6 +51075,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("star-rating", {
+                          attrs: { "star-size": 20 },
                           model: {
                             value: _vm.form.rating,
                             callback: function($$v) {
@@ -51159,6 +51166,28 @@ var render = function() {
                                 "product_id",
                                 $event.target.value
                               )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.user_id,
+                              expression: "form.user_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "hidden", name: "user_id" },
+                          domProps: { value: _vm.form.user_id },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form, "user_id", $event.target.value)
                             }
                           }
                         })
@@ -51545,7 +51574,7 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("Child", { attrs: { product: _vm.product_id } })
+                    _c("child", { attrs: { product: _vm.product_id } })
                   ],
                   1
                 ),

@@ -13,6 +13,9 @@
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Molla - Bootstrap eCommerce Template">
     <meta name="author" content="p-themes">
+    @if(Auth::check())
+    <meta name="user_id"  content="{{Auth::user()->id}}">
+    @endif
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('frontend/assets/images/icons/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('frontend/assets/images/icons/favicon-32x32.png')}}">
@@ -77,7 +80,22 @@
                                             </div><!-- End .header-menu -->
                                         </div>
                                     </li>
-                                    <li><a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a></li>
+                                    @if(Auth::user())
+                                    <li><a href="#">{{Auth::user()->name}}</a></li>
+                                    @endif
+                                    <li><a href="{{route('login')}}" >Sign in</a></li>
+                                    @if(Auth::user())
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>	
+                                    @endif
                                 </ul>
                             </li>
                         </ul><!-- End .top-menu -->
@@ -277,10 +295,9 @@
             </div><!-- End .header-bottom -->
         </header><!-- End .header -->
        
-        
-
+    
  <router-view></router-view>
-
+ 
 
 
 

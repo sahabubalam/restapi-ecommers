@@ -133,7 +133,8 @@
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
                      Add Review
                     </button>
-                    <Child :product="product_id"/></li>
+                    <child  :product="product_id" />
+                    </li>
                             <li class="nav-item">
                                 <a class="nav-link " id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
                             </li>
@@ -271,7 +272,8 @@ import Child from '../product/product-review';
                 product:[],
                 lists:[],
                 sizes:[],
-                product_id:this.$route.params.id 
+                product_id:this.$route.params.id, 
+                
             }
         },
         components:{
