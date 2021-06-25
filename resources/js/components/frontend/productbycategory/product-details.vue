@@ -191,22 +191,23 @@
                             <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                                 <div class="reviews">
                                     <h3>Reviews (2)</h3>
-                                    <div class="review">
+                                    <div class="review"  v-for="review in reviews" :key="review.id">
                                         <div class="row no-gutters">
                                             <div class="col-auto">
-                                                <h4><a href="#">Samanta J.</a></h4>
+                                                <h4><a href="#">{{review.name}}</a></h4>
                                                 <div class="ratings-container">
-                                                    <div class="ratings">
-                                                        <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                                    <div >
+                                                  <star-rating v-bind:increment="0.5" v-bind:max-rating="5"
+                                    v-bind:star-size="15" inactive-color="#000" v-bind:rating="review.rating"></star-rating>
                                                     </div><!-- End .ratings -->
                                                 </div><!-- End .rating-container -->
-                                                <span class="review-date">6 days ago</span>
+                                                <span class="review-date">{{review.created_at}}</span>
                                             </div><!-- End .col -->
                                             <div class="col">
-                                                <h4>Good, perfect size</h4>
+                                                <h4>{{review.headline}}</h4>
 
                                                 <div class="review-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                                                    <p>{{review.description}}</p>
                                                 </div><!-- End .review-content -->
 
                                                 <div class="review-action">
@@ -217,31 +218,7 @@
                                         </div><!-- End .row -->
                                     </div><!-- End .review -->
 
-                                    <div class="review">
-                                        <div class="row no-gutters">
-                                            <div class="col-auto">
-                                                <h4><a href="#">John Doe</a></h4>
-                                                <div class="ratings-container">
-                                                    <div class="ratings">
-                                                        <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                                    </div><!-- End .ratings -->
-                                                </div><!-- End .rating-container -->
-                                                <span class="review-date">5 days ago</span>
-                                            </div><!-- End .col -->
-                                            <div class="col">
-                                                <h4>Very good</h4>
-
-                                                <div class="review-content">
-                                                    <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
-                                                </div><!-- End .review-content -->
-
-                                                <div class="review-action">
-                                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
-                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                                </div><!-- End .review-action -->
-                                            </div><!-- End .col-auto -->
-                                        </div><!-- End .row -->
-                                    </div><!-- End .review -->
+                                   
                                 </div><!-- End .reviews -->
                             </div><!-- .End .tab-pane -->
                         </div><!-- End .tab-content -->
@@ -261,6 +238,7 @@
 import Child from '../product/product-review';
 
     export default{
+       
         data(){
            
             return{
@@ -273,9 +251,13 @@ import Child from '../product/product-review';
                 lists:[],
                 sizes:[],
                 product_id:this.$route.params.id, 
+                reviews:[],
+               
                 
             }
+
         },
+   
         components:{
                 Child
         },
@@ -289,6 +271,16 @@ import Child from '../product/product-review';
             })
             .catch()
         },
+        productreview(){
+            let id=this.$route.params.id   
+            axios.get('/api/product/review/'+id)
+            .then(response=>{
+                this.reviews=response.data;
+                console.log(response.data);
+            })
+            .catch()
+        },
+   
         allColor(){
             let id=this.$route.params.id
             axios.get('/api/product/color/'+id)
@@ -316,6 +308,7 @@ import Child from '../product/product-review';
         this.productdetails();
         this.allColor();
         this.allSize();
+        this.productreview();
   } 
     }
 </script>

@@ -3727,6 +3727,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['app', 'product'],
   data: function data() {
@@ -3740,7 +3744,8 @@ __webpack_require__.r(__webpack_exports__);
         description: '',
         approved: ''
       },
-      lists: []
+      lists: [],
+      errors: []
     };
   },
   methods: {
@@ -3748,8 +3753,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/add/product/review', this.form).then(function () {
+        _this.$router.push({
+          name: 'product-bycat'
+        });
+
         Notification.success();
-        console.log(_this.authUser);
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
       });
@@ -4008,29 +4016,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -4043,7 +4028,8 @@ __webpack_require__.r(__webpack_exports__);
       product: [],
       lists: [],
       sizes: [],
-      product_id: this.$route.params.id
+      product_id: this.$route.params.id,
+      reviews: []
     };
   },
   components: {
@@ -4059,22 +4045,31 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response.data);
       })["catch"]();
     },
-    allColor: function allColor() {
+    productreview: function productreview() {
       var _this2 = this;
+
+      var id = this.$route.params.id;
+      axios.get('/api/product/review/' + id).then(function (response) {
+        _this2.reviews = response.data;
+        console.log(response.data);
+      })["catch"]();
+    },
+    allColor: function allColor() {
+      var _this3 = this;
 
       var id = this.$route.params.id;
       axios.get('/api/product/color/' + id).then(function (_ref) {
         var data = _ref.data;
-        return _this2.lists = data;
+        return _this3.lists = data;
       })["catch"]();
     },
     allSize: function allSize() {
-      var _this3 = this;
+      var _this4 = this;
 
       var id = this.$route.params.id;
       axios.get('/api/product/size/' + id).then(function (_ref2) {
         var data = _ref2.data;
-        return _this3.sizes = data;
+        return _this4.sizes = data;
       })["catch"]();
     },
     AddtoCart: function AddtoCart(id) {
@@ -4088,6 +4083,7 @@ __webpack_require__.r(__webpack_exports__);
     this.productdetails();
     this.allColor();
     this.allSize();
+    this.productreview();
   }
 });
 
@@ -51075,7 +51071,12 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("star-rating", {
-                          attrs: { "star-size": 20 },
+                          attrs: {
+                            increment: 0.5,
+                            "max-rating": 5,
+                            "star-size": 30,
+                            "inactive-color": "#000"
+                          },
                           model: {
                             value: _vm.form.rating,
                             callback: function($$v) {
@@ -51589,7 +51590,89 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._m(11)
+            _c("div", { staticClass: "tab-content" }, [
+              _vm._m(11),
+              _vm._v(" "),
+              _vm._m(12),
+              _vm._v(" "),
+              _vm._m(13),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "tab-pane fade",
+                  attrs: {
+                    id: "product-review-tab",
+                    role: "tabpanel",
+                    "aria-labelledby": "product-review-link"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "reviews" },
+                    [
+                      _c("h3", [_vm._v("Reviews (2)")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.reviews, function(review) {
+                        return _c(
+                          "div",
+                          { key: review.id, staticClass: "review" },
+                          [
+                            _c("div", { staticClass: "row no-gutters" }, [
+                              _c("div", { staticClass: "col-auto" }, [
+                                _c("h4", [
+                                  _c("a", { attrs: { href: "#" } }, [
+                                    _vm._v(_vm._s(review.name))
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "ratings-container" },
+                                  [
+                                    _c(
+                                      "div",
+                                      [
+                                        _c("star-rating", {
+                                          attrs: {
+                                            increment: 0.5,
+                                            "max-rating": 5,
+                                            "star-size": 15,
+                                            "inactive-color": "#000",
+                                            rating: review.rating
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "review-date" }, [
+                                  _vm._v(_vm._s(review.created_at))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col" }, [
+                                _c("h4", [_vm._v(_vm._s(review.headline))]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "review-content" }, [
+                                  _c("p", [_vm._v(_vm._s(review.description))])
+                                ]),
+                                _vm._v(" "),
+                                _vm._m(14, true)
+                              ])
+                            ])
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]
+              )
+            ])
           ])
         ])
       ])
@@ -51814,240 +51897,149 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tab-content" }, [
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade show active",
-          attrs: {
-            id: "product-desc-tab",
-            role: "tabpanel",
-            "aria-labelledby": "product-desc-link"
-          }
-        },
-        [
-          _c("div", { staticClass: "product-desc-content" }, [
-            _c("h3", [_vm._v("Product Information")]),
-            _vm._v(" "),
-            _c("p", [
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade show active",
+        attrs: {
+          id: "product-desc-tab",
+          role: "tabpanel",
+          "aria-labelledby": "product-desc-link"
+        }
+      },
+      [
+        _c("div", { staticClass: "product-desc-content" }, [
+          _c("h3", [_vm._v("Product Information")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. "
+            )
+          ]),
+          _vm._v(" "),
+          _c("ul", [
+            _c("li", [
               _vm._v(
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. "
+                "Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. "
               )
             ]),
             _vm._v(" "),
-            _c("ul", [
-              _c("li", [
-                _vm._v(
-                  "Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. "
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [_vm._v("Vivamus finibus vel mauris ut vehicula.")]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Nullam a magna porttitor, dictum risus nec, faucibus sapien."
-                )
-              ])
-            ]),
+            _c("li", [_vm._v("Vivamus finibus vel mauris ut vehicula.")]),
             _vm._v(" "),
-            _c("p", [
+            _c("li", [
               _vm._v(
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. "
+                "Nullam a magna porttitor, dictum risus nec, faucibus sapien."
               )
             ])
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. "
+            )
           ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade",
-          attrs: {
-            id: "product-info-tab",
-            role: "tabpanel",
-            "aria-labelledby": "product-info-link"
-          }
-        },
-        [
-          _c("div", { staticClass: "product-desc-content" }, [
-            _c("h3", [_vm._v("Information")]),
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade",
+        attrs: {
+          id: "product-info-tab",
+          role: "tabpanel",
+          "aria-labelledby": "product-info-link"
+        }
+      },
+      [
+        _c("div", { staticClass: "product-desc-content" }, [
+          _c("h3", [_vm._v("Information")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. "
+            )
+          ]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Fabric & care")]),
+          _vm._v(" "),
+          _c("ul", [
+            _c("li", [_vm._v("Faux suede fabric")]),
             _vm._v(" "),
-            _c("p", [
+            _c("li", [_vm._v("Gold tone metal hoop handles.")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("RI branding")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Snake print trim interior ")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Adjustable cross body strap")]),
+            _vm._v(" "),
+            _c("li", [
               _vm._v(
-                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. "
+                " Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm"
               )
-            ]),
-            _vm._v(" "),
-            _c("h3", [_vm._v("Fabric & care")]),
-            _vm._v(" "),
-            _c("ul", [
-              _c("li", [_vm._v("Faux suede fabric")]),
-              _vm._v(" "),
-              _c("li", [_vm._v("Gold tone metal hoop handles.")]),
-              _vm._v(" "),
-              _c("li", [_vm._v("RI branding")]),
-              _vm._v(" "),
-              _c("li", [_vm._v("Snake print trim interior ")]),
-              _vm._v(" "),
-              _c("li", [_vm._v("Adjustable cross body strap")]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  " Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm"
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("h3", [_vm._v("Size")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("one size")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade",
-          attrs: {
-            id: "product-shipping-tab",
-            role: "tabpanel",
-            "aria-labelledby": "product-shipping-link"
-          }
-        },
-        [
-          _c("div", { staticClass: "product-desc-content" }, [
-            _c("h3", [_vm._v("Delivery & returns")]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v(
-                "We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our "
-              ),
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v("Delivery information")
-              ]),
-              _c("br"),
-              _vm._v(
-                "\r\n                                    We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our "
-              ),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Returns information")])
             ])
+          ]),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Size")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("one size")])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade",
+        attrs: {
+          id: "product-shipping-tab",
+          role: "tabpanel",
+          "aria-labelledby": "product-shipping-link"
+        }
+      },
+      [
+        _c("div", { staticClass: "product-desc-content" }, [
+          _c("h3", [_vm._v("Delivery & returns")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our "
+            ),
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Delivery information")]),
+            _c("br"),
+            _vm._v(
+              "\r\n                                    We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our "
+            ),
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Returns information")])
           ])
-        ]
-      ),
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "review-action" }, [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "icon-thumbs-up" }),
+        _vm._v("Helpful (2)")
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade",
-          attrs: {
-            id: "product-review-tab",
-            role: "tabpanel",
-            "aria-labelledby": "product-review-link"
-          }
-        },
-        [
-          _c("div", { staticClass: "reviews" }, [
-            _c("h3", [_vm._v("Reviews (2)")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "review" }, [
-              _c("div", { staticClass: "row no-gutters" }, [
-                _c("div", { staticClass: "col-auto" }, [
-                  _c("h4", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Samanta J.")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ratings-container" }, [
-                    _c("div", { staticClass: "ratings" }, [
-                      _c("div", {
-                        staticClass: "ratings-val",
-                        staticStyle: { width: "80%" }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "review-date" }, [
-                    _vm._v("6 days ago")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col" }, [
-                  _c("h4", [_vm._v("Good, perfect size")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "review-content" }, [
-                    _c("p", [
-                      _vm._v(
-                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!"
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "review-action" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "icon-thumbs-up" }),
-                      _vm._v("Helpful (2)")
-                    ]),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "icon-thumbs-down" }),
-                      _vm._v("Unhelpful (0)")
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "review" }, [
-              _c("div", { staticClass: "row no-gutters" }, [
-                _c("div", { staticClass: "col-auto" }, [
-                  _c("h4", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("John Doe")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ratings-container" }, [
-                    _c("div", { staticClass: "ratings" }, [
-                      _c("div", {
-                        staticClass: "ratings-val",
-                        staticStyle: { width: "100%" }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "review-date" }, [
-                    _vm._v("5 days ago")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col" }, [
-                  _c("h4", [_vm._v("Very good")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "review-content" }, [
-                    _c("p", [
-                      _vm._v(
-                        "Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!"
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "review-action" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "icon-thumbs-up" }),
-                      _vm._v("Helpful (0)")
-                    ]),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("i", { staticClass: "icon-thumbs-down" }),
-                      _vm._v("Unhelpful (0)")
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]
-      )
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "icon-thumbs-down" }),
+        _vm._v("Unhelpful (0)")
+      ])
     ])
   }
 ]

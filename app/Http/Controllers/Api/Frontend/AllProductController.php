@@ -8,6 +8,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+
 class AllProductController extends Controller
 {
     public function allProduct()
@@ -39,7 +40,8 @@ class AllProductController extends Controller
     }
     public function AddProductReview(Request $request)
     {
-            
+            $existuser=DB::table('productreviews')->where('user_id',$request->user_id)->where('product_id',$request->product_id)->first();
+           
             $data=array();
             $data['user_id']=$request->user_id;
             $data['product_id']=$request->product_id;
@@ -47,15 +49,29 @@ class AllProductController extends Controller
             $data['headline']=$request->headline;
             $data['description']=$request->description;
             $data['approved']=0;
-            return response()->json($data);
+            if($existuser)
+            {
+                
+                return response()->json("error");
+            }
+            else
+            {
+                DB::table('productreviews')->insert($data);
+                return response()->json($data);
+
+            }
+            
+           
     }
-    public function name()
+    public function GetProductReview($id)
     {
-        
-        $user=User::all();
-        return response()->json($user);
-       // echo Auth::guard('api')->user()->id;
+        $review=DB::table('productreviews')
+        ->join('users','productreviews.user_id','users.id')
+        ->select('users.name','productreviews.*')
+        ->where('product_id',$id)->get();
+        return response()->json($review);
     }
+    
    
   
 }

@@ -10,7 +10,11 @@
                     <div class="container">
                        
                         <h5 class="mt-2">Rate Our Product</h5>
-                            <star-rating :star-size="20" v-model="form.rating"></star-rating>
+                        <star-rating  v-model="form.rating" v-bind:increment="0.5"
+                                    v-bind:max-rating="5"
+                                    v-bind:star-size="30" inactive-color="#000" >
+                        </star-rating>
+                            <!-- <star-rating :star-size="20"  v-model="form.rating"></star-rating> -->
                             <div class="form-group">
                                 <input type="text" class="form-control" v-model="form.headline" placeholder="Headline">
                             </div>
@@ -38,6 +42,7 @@
 
     export default{
         props:['app','product'],
+
       
         data(){
             return{
@@ -50,18 +55,19 @@
                     description:'',
                     approved:'',
                 },
-               
+              
                 lists:[],
+                errors:[],
             }
         },
         methods:{
             ProductReview(){
                
             axios.post('/api/add/product/review',this.form)
+
             .then(()=>{
-                   
+                   this.$router.push({ name: 'product-bycat'})
                     Notification.success()
-                    console.log(this.authUser)
                 })
                 .catch(error=>this.errors=error.response.data.errors)
         },
