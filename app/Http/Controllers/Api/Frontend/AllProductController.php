@@ -53,6 +53,7 @@ class AllProductController extends Controller
             {
                 
                 return response()->json("error");
+               
             }
             else
             {

@@ -26,6 +26,8 @@ let editcoupon = require('./components/admin/coupon/edit.vue').default;
 let productbycat = require('./components/frontend/productbycategory/product.vue').default;
 let productdetails = require('./components/frontend/productbycategory/product-details.vue').default;
 //product
+let frontallproduct = require('./components/frontend/product/allproduct.vue').default;
+let wishlist = require('./components/frontend/wishlist/wishlist.vue').default;
 
 
 export const routes = [
@@ -58,7 +60,9 @@ export const routes = [
      //frontend route
      { path: '/product-bycat', component: productbycat, name:'product-bycat' },
      { path: '/product-details/:id', component: productdetails, name:'product-details' },
-     //review
+     //all product frontend
+     { path: '/all-product', component: frontallproduct, name:'all-product' },
+     { path: '/wishlist', component: wishlist, name:'wishlist' },
      
 
 

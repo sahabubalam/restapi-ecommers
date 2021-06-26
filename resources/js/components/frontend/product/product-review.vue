@@ -12,7 +12,7 @@
                         <h5 class="mt-2">Rate Our Product</h5>
                         <star-rating  v-model="form.rating" v-bind:increment="0.5"
                                     v-bind:max-rating="5"
-                                    v-bind:star-size="30" inactive-color="#000" >
+                                    v-bind:star-size="30" >
                         </star-rating>
                             <!-- <star-rating :star-size="20"  v-model="form.rating"></star-rating> -->
                             <div class="form-group">
@@ -27,9 +27,9 @@
             
                 
                 </div>
-                <div class="container">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                <div class="container my-2">
+                    <button type="button" style="min-width:0px;font-size:10px" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" style="min-width:0px;font-size:10px" class="btn btn-sm btn-primary">Save</button>
                 </div>
                 </form>
             </div>
@@ -66,15 +66,20 @@
             axios.post('/api/add/product/review',this.form)
 
             .then(()=>{
-                   this.$router.push({ name: 'product-bycat'})
-                    Notification.success()
+                    
+                    if(this.errors){
+                    }
+                    else{
+                        Notification.success()
+                    }
                 })
                 .catch(error=>this.errors=error.response.data.errors)
         },
      
         },
         created(){
-  } 
+            this.ProductReview();
+        } 
     }
 </script>
 <style>

@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\AllStatusUpdateController;
 use App\Http\Controllers\Api\Frontend\AllProductController;
 use App\Http\Controllers\Api\Frontend\CartController;
+use App\Http\Controllers\Api\Frontend\WishlistController;
+
 
 
 
@@ -49,5 +51,5 @@ Route::post('/addtocart/{id}', [CartController::class, 'AddtoCart']);
 
 Route::post('/add/product/review', [AllProductController::class, 'AddProductReview']);
 Route::get('/product/review/{id}', [AllProductController::class, 'GetProductReview']);
-
-
+Route::post('/add/wishlist/{id}', [WishlistController::class, 'AddWishlist']);
+Route::get('/getting/wishlist/{id}', [WishlistController::class, 'GettingWishlist']);

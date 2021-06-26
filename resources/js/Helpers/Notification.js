@@ -58,5 +58,13 @@ class Notification{
          timeout:1000,
      }).show();
     }
+    login(){
+        new Noty({
+            type:'success',
+            layout:'topRight',
+            text: 'Please Login Your Account!',
+            timeout:1000,
+        }).show();
+       }
  }
  export default Notification=new Notification();

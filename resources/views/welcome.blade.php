@@ -15,6 +15,8 @@
     <meta name="author" content="p-themes">
     @if(Auth::check())
     <meta name="user_id"  content="{{Auth::user()->id}}">
+    @else
+    <meta name="user_id"  content="0">
     @endif
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('frontend/assets/images/icons/apple-touch-icon.png')}}">
@@ -139,16 +141,17 @@
                                 <p>Account</p>
                             </a>
                         </div><!-- End .compare-dropdown -->
-
-                        <div class="wishlist">
-                            <a href="wishlist.html" title="Wishlist">
-                                <div class="icon">
-                                    <i class="icon-heart-o"></i>
-                                    <span class="wishlist-count badge">3</span>
-                                </div>
-                                <p>Wishlist</p>
-                            </a>
-                        </div><!-- End .compare-dropdown -->
+                        @if(Auth::check())
+                            <div class="wishlist">
+                                <router-link  to="/wishlist" title="Wishlist">
+                                    <div class="icon">
+                                        <i class="icon-heart-o"></i>
+                                        <span class="wishlist-count badge">3</span>
+                                    </div>
+                                    <p>Wishlist</p>
+                                </router-link>
+                            </div><!-- End .compare-dropdown -->
+                        @endif
 
                         <div class="dropdown cart-dropdown">
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
@@ -248,9 +251,11 @@
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
                                     <router-link to="/product-bycat" class="sf-with-ul">Home</router-link>
-
-                                   
                                 </li>
+                                <li class="megamenu-container active">
+                                    <router-link to="/all-product" class="sf-with-ul">Product</router-link>
+                                </li>
+                               
                               
                                 <li>
                                     <router-link to="" class="sf-with-ul">Product</router-link>
