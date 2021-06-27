@@ -15,7 +15,7 @@
                                     v-bind:star-size="30" >
                         </star-rating>
                             <!-- <star-rating :star-size="20"  v-model="form.rating"></star-rating> -->
-                            <div class="form-group">
+                            <div class="form-group mt-1">
                                 <input type="text" class="form-control" v-model="form.headline" placeholder="Headline">
                             </div>
                             <div class="form-group">

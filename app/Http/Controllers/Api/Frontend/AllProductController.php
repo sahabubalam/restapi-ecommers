@@ -59,7 +59,6 @@ class AllProductController extends Controller
             {
                 DB::table('productreviews')->insert($data);
                 return response()->json($data);
-
             }
             
            

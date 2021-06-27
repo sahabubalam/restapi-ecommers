@@ -128,7 +128,7 @@
                    
 
                     <div class="product-details-tab">
-                        <ul class="nav nav-pills justify-content-center" role="tablist">
+                        <ul class="nav nav-pills" role="tablist">
                         <li class="nav-item">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
                         Add Review
@@ -212,7 +212,7 @@
 import Child from '../product/product-review';
 
     export default{
-       
+        props:['app'],
         data(){
            
             return{
@@ -220,6 +220,7 @@ import Child from '../product/product-review';
                 color:'',
                 size:'',
                 pro_quantity:'',
+                user_id:this.$userId,
                 },
                 product:[],
                 lists:[],
@@ -229,6 +230,13 @@ import Child from '../product/product-review';
                
                 
             }
+
+        },
+        computed:{
+             //check login or not
+             user(){
+            return this.$userId;
+        }
 
         },
    
@@ -250,7 +258,7 @@ import Child from '../product/product-review';
             axios.get('/api/product/review/'+id)
             .then(response=>{
                 this.reviews=response.data;
-                //console.log(response.data);
+                // console.log(response.data);
             })
             .catch()
         },
@@ -268,12 +276,20 @@ import Child from '../product/product-review';
             .catch()
         },
         AddtoCart(id){
-        axios.post('/api/addtocart/'+id,this.form)
-          .then(()=>{
-              //Reload.$emit('AfterAdd');
-              Notification.cart_success()
-          })
-          .catch()
+            if(this.user > 0){
+                axios.post('/api/addtocart/'+id,this.form)
+                .then(()=>{
+                    //Reload.$emit('AfterAdd');
+                    this.$router.push({ name: 'all-product'})
+                    Notification.cart_success()
+                })
+                .catch()
+            }
+            else{
+                Notification.login();
+            }
+                
+        
       },
       
   
@@ -282,14 +298,13 @@ import Child from '../product/product-review';
         this.productdetails();
         this.allColor();
         this.allSize();
+        this.productreview()
+        // this.interval= setInterval(function(){
+        //     this.productreview()
+        // }.bind(this),500);
        
   },
-  mounted(){
-    this.productreview();
-    this.interval=setInterval(function(){
-        this.productreview();
-    }.bind(this),500);
-  } 
+ 
     }
 </script>
 <style>

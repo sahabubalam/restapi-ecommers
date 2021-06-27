@@ -48,8 +48,11 @@ Route::get('/getting/product/{id}', [AllProductController::class, 'GettingProduc
 Route::get('/product/details/{id}', [AllProductController::class, 'ProductDetails']);
 //add to cart
 Route::post('/addtocart/{id}', [CartController::class, 'AddtoCart']);
+Route::get('/getting/cart/{id}', [CartController::class, 'GetCartProduct']);
 
+//product review
 Route::post('/add/product/review', [AllProductController::class, 'AddProductReview']);
 Route::get('/product/review/{id}', [AllProductController::class, 'GetProductReview']);
+//product wishlist
 Route::post('/add/wishlist/{id}', [WishlistController::class, 'AddWishlist']);
 Route::get('/getting/wishlist/{id}', [WishlistController::class, 'GettingWishlist']);

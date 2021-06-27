@@ -28,7 +28,10 @@ let productdetails = require('./components/frontend/productbycategory/product-de
 //product
 let frontallproduct = require('./components/frontend/product/allproduct.vue').default;
 let wishlist = require('./components/frontend/wishlist/wishlist.vue').default;
-
+//cart
+let cart = require('./components/frontend/cart/cart.vue').default;
+//checkout
+let checkout = require('./components/frontend/checkout/checkout.vue').default;
 
 export const routes = [
     
@@ -63,6 +66,10 @@ export const routes = [
      //all product frontend
      { path: '/all-product', component: frontallproduct, name:'all-product' },
      { path: '/wishlist', component: wishlist, name:'wishlist' },
+     //cart
+     { path: '/cart', component: cart, name:'cart' },
+      //checkout
+      { path: '/checkout', component: checkout, name:'checkout' },
      
 
 
