@@ -27,20 +27,27 @@
 
                     <div class="col-md-4 mb-3">
                         <label for="firstName">District</label>
-                        <select style="min-width:0px;height:35px;font-size:14px;border-radius:6px" class="form-control" id="country">
+                        <select style="min-width:0px;height:35px;font-size:14px;border-radius:6px" v-model="selectedDistrict" class="form-control" id="country">
                             <option value="">Choose...</option>
-                            <option>United States</option>
+                            <option v-for="district in districts" :key="district.id" :value="district.id">{{district.district_name}}</option>
                         </select>
                       
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="lastName">Upazela</label>
-                        <input type="text" style="min-width:0px;height:35px;font-size:10px;border-radius:6px" class="form-control"  placeholder="" value="" >
+                        <label for="lastName">Upozela</label>
+                        <select style="min-width:0px;height:35px;font-size:14px;border-radius:6px"  class="form-control" id="country">
+                            <option selected="" disabled="">Choose Upozela</option>
+                            <option v-for="upozela in upozelas" :key="upozela.id" :value="upozela.id">{{upozela.upozela_name}}</option>
+                        </select>
                        
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="lastName">Village</label>
-                        <input type="text" style="min-width:0px;height:35px;font-size:10px;border-radius:6px" class="form-control" placeholder="" value="">
+                        <select style="min-width:0px;height:35px;font-size:14px;border-radius:6px"  class="form-control" id="country">
+                            <option selected="" disabled="">Choose Village</option>
+                            <option v-for="upozela in upozelas" :key="upozela.id" :value="upozela.id">{{upozela.upozela_name}}</option>
+                        </select>
+                       
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="lastName">Postal Code</label>
@@ -61,24 +68,38 @@
     </div>
 </template>
 <script>
-   // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  window.addEventListener('load', function () {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation')
-
-    // Loop over them and prevent submission
-    Array.prototype.filter.call(forms, function (form) {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-        form.classList.add('was-validated')
-      }, false)
-    })
-  }, false)
-}())
+    export default{
+        data(){
+            return{
+                districts:[],
+                searchTerm:'',
+                upozelas:'',
+                selectedDistrict:'',
+            }
+        },
+        computed:{
+        },
+        watch:{
+            selectedDistrict: function(value){
+                axios.get('/api/get/upozela?district_id='+this.selectedDistrict)
+                .then(response=>{
+                    this.upozelas=response.data
+                });
+            }
+        },
+        methods:{
+            allDistrict(){
+            axios.get('/api/getting/district')
+            .then(({data})=>this.districts=data)
+            .catch()
+        },
+      
+        },
+        created(){
+        this.allDistrict();
+       
+  } 
+    }
 </script>
+<style>
+</style>

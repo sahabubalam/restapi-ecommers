@@ -21,6 +21,15 @@ let editsize = require('./components/admin/size/edit.vue').default;
 let coupon = require('./components/admin/coupon/create.vue').default;
 let allcoupon = require('./components/admin/coupon/index.vue').default;
 let editcoupon = require('./components/admin/coupon/edit.vue').default;
+//district component
+let district = require('./components/admin/district/create.vue').default;
+let alldistrict = require('./components/admin/district/index.vue').default;
+//upozela component
+let upozela = require('./components/admin/upozela/create.vue').default;
+let allupozela = require('./components/admin/upozela/index.vue').default;
+//village component
+let village = require('./components/admin/village/create.vue').default;
+let allvillage = require('./components/admin/village/index.vue').default;
 
 //frontend
 let productbycat = require('./components/frontend/productbycategory/product.vue').default;
@@ -59,8 +68,17 @@ export const routes = [
      { path: '/admin/dashboard/store-coupon', component: coupon, name:'store-coupon' },
      { path: '/admin/dashboard/coupon', component: allcoupon, name:'coupon' },
      { path: '/admin/dashboard/edit-coupon/:id', component: editcoupon, name:'edit-coupon' },
+    //district route
+    { path: '/admin/dashboard/store-district', component: district, name:'store-district' },
+    { path: '/admin/dashboard/district', component: alldistrict, name:'all-district' },
+    //upozela route
+    { path: '/admin/dashboard/store-upozela', component: upozela, name:'store-upozela' },
+    { path: '/admin/dashboard/upozela', component: allupozela, name:'all-upozela' },
+    //village route
+    { path: '/admin/dashboard/store-village', component: upozela, name:'store-village' },
+    { path: '/admin/dashboard/village', component: allvillage, name:'all-village' },
 
-     //frontend route
+     // all frontend route
      { path: '/product-bycat', component: productbycat, name:'product-bycat' },
      { path: '/product-details/:id', component: productdetails, name:'product-details' },
      //all product frontend

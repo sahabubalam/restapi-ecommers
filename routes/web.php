@@ -36,7 +36,7 @@ Route::get('/admin/logout',[AdminController::class,'Logout'])->name('admin.logou
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin')->middleware('admin');
 
-Route::get('/admin/dashboard/{any}', [AdminController::class, 'dashboard'])->middleware('admin')->where('any','.*');
+Route::get('/admin/dashboard/{any}', [AdminController::class, 'dashboard'])->where('any','.*');
 
 // Route::get('/admin/@{dashboard}/{vue_capture?}',function(){
 //     return view('admin.index');

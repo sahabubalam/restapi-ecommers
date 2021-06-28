@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+	@if(Auth::check())
+    <meta name="user_id"  content="{{Auth::user()->id}}">
+    @else
+    <meta name="user_id"  content="{{0}}">
+    @endif
+
     <link rel="icon" href="{{asset('backend/images/favicon.ico')}}">
 
     <title>Admin Dashboard</title>
@@ -179,7 +186,19 @@
 			<span><router-link to="/admin/dashboard/admin-home">Dashboard </router-link></span>
           </a>
         </li>  
-		
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Application</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/"><i class="ti-more"></i>Chat</router-link></li>
+			  <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li>
+			</ul>
+		  </li> 
         
 		<li class="treeview">
 			<a href="#">
@@ -246,8 +265,46 @@
 			  <li><router-link to="/admin/dashboard/coupon"><i class="ti-more"></i>All Coupon </router-link></li>
 			</ul>
 		</li> 
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>District</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/admin/dashboard/store-district"><i class="ti-more"></i>Add District </router-link></li>
+			  <li><router-link to="/admin/dashboard/district"><i class="ti-more"></i>All District </router-link></li>
+			</ul>
+		</li> 
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Upozela</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/admin/dashboard/store-upozela"><i class="ti-more"></i>Add Upozela </router-link></li>
+			  <li><router-link to="/admin/dashboard/upozela"><i class="ti-more"></i>All Upozela </router-link></li>
+			</ul>
+		</li> 
 	
-	
+		<li class="treeview">
+			<a href="#">
+			  <i data-feather="message-circle"></i>
+			  <span>Village</span>
+			  <span class="pull-right-container">
+				<i class="fa fa-angle-right pull-right"></i>
+			  </span>
+			</a>
+			<ul class="treeview-menu">
+			  <li><router-link to="/admin/dashboard/store-village"><i class="ti-more"></i>Add Village </router-link></li>
+			  <li><router-link to="/admin/dashboard/village"><i class="ti-more"></i>All Village </router-link></li>
+			</ul>
+		</li> 
 		
 	 
 		  
@@ -562,7 +619,7 @@
 <script src="{{asset('../assets/icons/feather-icons/feather.min.js')}}"></script>	
 <script src="{{asset('../assets/vendor_components/easypiechart/dist/jquery.easypiechart.js')}}"></script>
 <script src="{{asset('../assets/vendor_components/apexcharts-bundle/irregular-data-series.js')}}"></script>
-<script src="{{asset('../assets/vendor_components/apexcharts-bundle/dist/apexcharts.js')}}"></script>
+{{-- <script src="{{asset('../assets/vendor_components/apexcharts-bundle/dist/apexcharts.js')}}"></script> --}}
 
 <script src="{{asset('../assets/vendor_components/datatable/datatables.min.js')}}"></script>
 {{-- <script src="{{asset('backend/js/pages/data-table.js')}}"></script> --}}
