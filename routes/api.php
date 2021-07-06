@@ -73,3 +73,5 @@ Route::post('/add/wishlist/{id}', [WishlistController::class, 'AddWishlist']);
 Route::get('/getting/wishlist/{id}', [WishlistController::class, 'GettingWishlist']);
 //checkout
 Route::get('/get/upozela', [CheckoutController::class, 'GetUpozelabyDsitrict']);
+Route::post('/address', [CheckoutController::class, 'SelectAddress']);
+Route::get('/get/shipping_upozela', [CheckoutController::class, 'GetshippingUpozelabyDsitrict']);

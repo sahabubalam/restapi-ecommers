@@ -756,6 +756,20 @@
 <!-- Main JS File -->
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
 <script src="{{asset('frontend/assets/js/demos/demo-2.js')}}"></script>
+<script>
+//      function checkMe(){
+//             var cb=document.getElementById("abc");
+//             var text=document.getElementById("msg");
+//             var m=document.getElementById("ab");
+//             if(cb.checked==true){
+//                 text.style.display="none";
+//             }
+            
+//             else{
+//                 text.style.display="";
+//             }
+//         }
+// </script>
 </body>
 
 
